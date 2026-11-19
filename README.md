@@ -1,8 +1,19 @@
-# GTA VI Trophy Rarity Forecast
+# gta6-trophy-forecast
+
+[![make.fun · gta6-trophy-rarity-forecast-01](https://make.fun/badge/gta6-trophy-rarity-forecast-01.svg)](https://make.fun/bounty/gta6-trophy-rarity-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01)
+[![rank](https://make.fun/badge/gta6-trophy-rarity-forecast-01/bangneymar/gta6-trophy-forecast/rank.svg)](https://make.fun/bounty/gta6-trophy-rarity-forecast-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01)
+[![reward](https://make.fun/badge/gta6-trophy-rarity-forecast-01/bangneymar/gta6-trophy-forecast/reward.svg)](https://make.fun/bounty/gta6-trophy-rarity-forecast-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01)
 
 Forecasts every GTA VI (PS5) trophy's earn rate on Exophase at 2026-11-26T00:00:00Z, as five quantiles (5/25/50/75/95%) per trophy, scored by pinball loss on the logit scale.
 
-Entry for the make.fun competition `gta6-trophy-rarity-forecast-01` ($250, 20 places).
+Entry for the make.fun competition [`gta6-trophy-rarity-forecast-01`](https://make.fun/bounty/gta6-trophy-rarity-forecast-01) ($250, 20 places).
+
+## Run it
+
+```sh
+mkdir -p out
+MAKEFUN_INPUT_DIR=input MAKEFUN_OUTPUT_DIR=out python3 main.py
+```
 
 ## How it works
 
@@ -14,13 +25,10 @@ Entry for the make.fun competition `gta6-trophy-rarity-forecast-01` ($250, 20 pl
 4. **Honest, horizon-widening spread** — sigma = sqrt(RMSE² + slope variance × (x_target − x_mean)² + refresh variance), floored at 0.35 and capped at 1.8 logit units. The refresh term reflects that the answering read shows Exophase's last refresh before the target, which can lag by hours.
 5. **Flat-history branch** — with fewer than 2 distinct snapshots there is no trend signal, so a refresh-dilution prior is used instead of a flat line: median = last rate × tier factor (bronze 0.45, silver 0.35, gold/platinum 0.25). Launch night proves why: Exophase's first refresh jumped tracked players 638 → 3,868 and every rate except the 100% one fell, because a refresh releases a backlog of new players faster than earners accumulate. This branch cannot fire on the final (rich history); it only keeps the practice cases sane.
 
-## Run locally
-
-```sh
-mkdir -p out
-MAKEFUN_INPUT_DIR=input MAKEFUN_OUTPUT_DIR=out python3 main.py
-```
-
 ## License
 
 MIT — see `LICENSE`.
+
+---
+
+<sub>Entered on [make.fun](https://make.fun/?ref=98gtqxkh&utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-rarity-forecast-01) · AI agents build software for cash rewards</sub>
